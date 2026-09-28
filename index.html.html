@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Asesmen Identitas Tempat Pariwisata Perkotaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6f5;--card:#fff;--ink:#14262b;--mute:#52666b;--line:#d3ddda;--teal:#0f766e;--tealbg:#dcefec;--amber:#b7791f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a1d;--card:#15262a;--ink:#e6f0ee;--mute:#9db3b0;--line:#27403f;--teal:#4fd1c0;--tealbg:#17393a;--amber:#f0b44c}}
+:root[data-theme="dark"]{--bg:#0e1a1d;--card:#15262a;--ink:#e6f0ee;--mute:#9db3b0;--line:#27403f;--teal:#4fd1c0;--tealbg:#17393a;--amber:#f0b44c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Public Sans",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 18px 60px}
+h1,h2{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0}
+h1{font-size:clamp(1.7rem,5vw,2.4rem);font-weight:700}
+h2{font-size:1.3rem;margin-bottom:6px}
+.lead{color:var(--mute);max-width:62ch;margin:10px 0 26px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;margin-bottom:18px}
+label.f{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
+input[type=text],select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus-visible,select:focus-visible,button:focus-visible,.lk input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px}
+.dim p.d{color:var(--mute);margin:0 0 14px;font-size:.92rem}
+.q{padding:14px 0;border-top:1px solid var(--line)}
+.q>div{margin-bottom:8px}
+.lk{display:flex;gap:6px}
+.lk label{flex:1;cursor:pointer}
+.lk input{position:absolute;opacity:0}
+.lk span{display:block;text-align:center;padding:8px 0;border:1px solid var(--line);border-radius:8px;font-weight:600;background:var(--bg)}
+.lk input:checked+span{background:var(--teal);color:var(--bg);border-color:var(--teal)}
+.scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mute);margin-top:4px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:2;font-size:.85rem;color:var(--mute)}
+.bar i{display:block;height:6px;background:var(--line);border-radius:3px;margin-top:4px;overflow:hidden}
+.bar b{display:block;height:100%;width:0;background:var(--teal);transition:width .2s}
+button{font:inherit;font-weight:600;padding:12px 20px;border-radius:8px;border:0;background:var(--teal);color:var(--bg);cursor:pointer}
+button.g{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:8px}
+.err{color:var(--amber);font-weight:600;min-height:1.4em}
+.big{font:700 3rem/1 "Source Serif 4",serif;color:var(--teal)}
+.row{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:.92rem}
+.row .n{flex:0 0 190px}.row .t{flex:1;height:10px;background:var(--line);border-radius:5px;overflow:hidden}.row .t i{display:block;height:100%;background:var(--teal)}.row .v{width:32px;text-align:right;font-weight:600}
+.row.low .t i{background:var(--amber)}
+.chart{overflow-x:auto}svg text{fill:var(--ink);font:12px "Public Sans",sans-serif}
+.rec{background:var(--tealbg);border-radius:8px;padding:12px 14px;margin-top:10px}
+[hidden]{display:none!important}
+@media(max-width:520px){.row{flex-wrap:wrap}.row .n{flex:1 0 100%}}
+</style>
+</head>
+<body>
+<main>
+<h1>Asesmen Identitas Tempat Pariwisata Perkotaan Berkelanjutan</h1>
+<p class="lead">Model penilaian yang menghubungkan identitas tempat dengan kualitas hidup masyarakat. Isi 15 pernyataan untuk melihat profil kekuatan dan kelemahan kawasan wisata yang Anda teliti.</p>
+
+<section id="s-id">
+<h2>Data studi kasus</h2>
+<label class="f" for="lok">Nama kawasan wisata</label>
+<input type="text" id="lok" placeholder="Contoh: Kawasan Kesawan, Medan">
+<label class="f" for="rol">Peran Anda</label>
+<select id="rol"><option>Warga setempat</option><option>Pelaku usaha wisata</option><option>Pengelola / pemerintah</option><option>Wisatawan</option><option>Peneliti / akademisi</option></select>
+</section>
+
+<div class="bar" id="bar"><span id="pg">0 dari 15 terjawab</span><i><b id="pb"></b></i></div>
+<div id="form"></div>
+
+<div class="err" id="err" role="alert"></div>
+<button id="go">Hitung hasil</button><button class="g" id="rs">Ulangi</button>
+
+<section id="hasil" hidden aria-live="polite" style="margin-top:22px">
+<h2 id="hj"></h2>
+<div class="big" id="tot"></div><div id="kat" style="font-weight:600;margin-bottom:14px"></div>
+<div class="chart" id="rad"></div>
+<div id="bars"></div>
+<div class="rec" id="rec"></div>
+<p style="margin-top:14px"><button id="cp">Salin ringkasan hasil</button> <span id="cpm" style="color:var(--mute);font-size:.85rem"></span></p>
+</section>
+</main>
+<script>
+var D=[
+{k:"Identitas fisik",d:"Karakter bangunan, ruang publik, dan lanskap kawasan.",r:"Perkuat konservasi bangunan/ruang khas dan panduan desain yang menjaga karakter visual kawasan.",q:["Kawasan memiliki karakter fisik (arsitektur, lanskap) yang mudah dikenali.","Bangunan dan ruang bersejarah terawat dengan baik.","Ruang publik nyaman, aman, dan mudah diakses semua kelompok."]},
+{k:"Aktivitas & fungsi",d:"Kegiatan sehari-hari dan wisata yang hidup di kawasan.",r:"Atur keseimbangan fungsi wisata dan fungsi harian warga, misalnya zonasi waktu dan jalur pejalan kaki.",q:["Kawasan dipakai warga untuk aktivitas sehari-hari, tidak hanya untuk wisata.","Kegiatan wisata selaras dengan kegiatan warga (tidak saling mengganggu).","Transportasi dan pergerakan di kawasan tertata dan tidak macet berlebihan."]},
+{k:"Makna sosial-budaya",d:"Keterikatan, kebanggaan, dan nilai budaya yang dirasakan.",r:"Libatkan komunitas dalam program budaya, cerita lokal, dan pelestarian tradisi.",q:["Warga bangga dan merasa memiliki kawasan ini.","Tradisi, cerita, dan budaya lokal ditampilkan secara otentik.","Wisata tidak menggerus nilai dan kebiasaan masyarakat setempat."]},
+{k:"Kualitas hidup",d:"Ekonomi, kesejahteraan, dan kesehatan masyarakat.",r:"Perluas manfaat ekonomi bagi warga lokal dan pantau dampak wisata pada kenyamanan hidup mereka.",q:["Wisata memberi peluang kerja dan penghasilan bagi warga lokal.","Kebisingan, sampah, dan kepadatan masih dalam batas nyaman bagi warga.","Warga puas dengan kondisi hidup mereka (kesehatan, keamanan, layanan dasar)."]},
+{k:"Keberlanjutan & tata kelola",d:"Pengelolaan lingkungan dan partisipasi pemangku kepentingan.",r:"Susun forum kolaborasi pemangku kepentingan dan indikator pemantauan lingkungan yang terbuka.",q:["Ada kebijakan dan pengelolaan lingkungan (sampah, air, ruang hijau) yang berjalan.","Warga dilibatkan dalam pengambilan keputusan pariwisata.","Pengelolaan kawasan dirancang untuk jangka panjang, bukan sekadar mengejar kunjungan."]}];
+var F=document.getElementById("form"),h="";
+D.forEach(function(x,i){h+='<section class="dim"><h2>'+x.k+'</h2><p class="d">'+x.d+'</p>';
+x.q.forEach(function(t,j){var n="q"+i+"_"+j;h+='<div class="q"><div>'+t+'</div><div class="lk" role="radiogroup" aria-label="'+t+'">';
+for(var v=1;v<=5;v++)h+='<label><input type="radio" name="'+n+'" value="'+v+'"><span>'+v+'</span></label>';
+h+='</div><div class="scale"><span>Sangat tidak setuju</span><span>Sangat setuju</span></div></div>'});h+='</section>'});
+F.innerHTML=h;
+function ans(){var a=[],c=0;D.forEach(function(x,i){var s=[];x.q.forEach(function(t,j){var e=document.querySelector('input[name="q'+i+'_'+j+'"]:checked');if(e){s.push(+e.value);c++}else s.push(null)});a.push(s)});return{a:a,c:c}}
+function prog(){var c=ans().c;document.getElementById("pg").textContent=c+" dari 15 terjawab";document.getElementById("pb").style.width=(c/15*100)+"%"}
+F.addEventListener("change",function(){prog();document.getElementById("err").textContent=""});
+function kat(v){return v<2.6?"Rendah":v<3.4?"Sedang":v<4.2?"Baik":"Sangat baik"}
+var last="";
+document.getElementById("go").onclick=function(){
+var r=ans();if(r.c<15){document.getElementById("err").textContent="Masih ada "+(15-r.c)+" pernyataan yang belum dijawab.";return}
+var m=r.a.map(function(s){return s.reduce(function(p,q){return p+q},0)/3});
+var tot=m.reduce(function(p,q){return p+q},0)/5,lok=document.getElementById("lok").value.trim()||"Kawasan studi kasus";
+document.getElementById("hj").textContent="Hasil: "+lok;
+document.getElementById("tot").textContent=tot.toFixed(2)+" / 5";
+document.getElementById("kat").textContent="Kategori keseluruhan: "+kat(tot);
+var b="";m.forEach(function(v,i){b+='<div class="row'+(v<3.4?' low':'')+'"><span class="n">'+D[i].k+'</span><span class="t"><i style="width:'+(v/5*100)+'%"></i></span><span class="v">'+v.toFixed(1)+'</span></div>'});
+document.getElementById("bars").innerHTML=b;
+var lo=m.indexOf(Math.min.apply(null,m)),hi=m.indexOf(Math.max.apply(null,m));
+document.getElementById("rec").innerHTML="<b>Dimensi terkuat:</b> "+D[hi].k+" ("+m[hi].toFixed(1)+").<br><b>Prioritas perbaikan:</b> "+D[lo].k+" ("+m[lo].toFixed(1)+"). "+D[lo].r;
+var C=150,R=100,p="",g="",l="",n=D.length;
+for(var lv=1;lv<=5;lv++){var pts=[];for(var i=0;i<n;i++){var an=-Math.PI/2+i*2*Math.PI/n;pts.push((C+R*lv/5*Math.cos(an)).toFixed(1)+","+(C+R*lv/5*Math.sin(an)).toFixed(1))}g+='<polygon points="'+pts.join(" ")+'" fill="none" stroke="var(--line)"/>'}
+var dp=[];for(var i=0;i<n;i++){var an=-Math.PI/2+i*2*Math.PI/n;dp.push((C+R*m[i]/5*Math.cos(an)).toFixed(1)+","+(C+R*m[i]/5*Math.sin(an)).toFixed(1));
+g+='<line x1="'+C+'" y1="'+C+'" x2="'+(C+R*Math.cos(an)).toFixed(1)+'" y2="'+(C+R*Math.sin(an)).toFixed(1)+'" stroke="var(--line)"/>';
+var ax=C+(R+16)*Math.cos(an),ay=C+(R+16)*Math.sin(an),an2=Math.cos(an)>.3?"start":Math.cos(an)<-.3?"end":"middle";
+l+='<text x="'+ax.toFixed(1)+'" y="'+(ay+4).toFixed(1)+'" text-anchor="'+an2+'">'+D[i].k.split(" & ")[0]+'</text>'}
+document.getElementById("rad").innerHTML='<svg viewBox="-20 0 340 300" width="100%" style="max-width:420px;display:block;margin:0 auto" role="img" aria-label="Diagram radar lima dimensi">'+g+'<polygon points="'+dp.join(" ")+'" fill="var(--teal)" fill-opacity=".25" stroke="var(--teal)" stroke-width="2"/>'+l+'</svg>';
+last="Hasil asesmen "+lok+" ("+document.getElementById("rol").value+")\nSkor total: "+tot.toFixed(2)+"/5 ("+kat(tot)+")\n"+D.map(function(x,i){return "- "+x.k+": "+m[i].toFixed(1)}).join("\n")+"\nPrioritas perbaikan: "+D[lo].k;
+var s=document.getElementById("hasil");s.hidden=false;s.scrollIntoView({behavior:"smooth"})};
+document.getElementById("cp").onclick=function(){var o=document.getElementById("cpm");try{navigator.clipboard.writeText(last).then(function(){o.textContent="Tersalin."},function(){o.textContent="Gagal menyalin. Salin manual dari layar."})}catch(e){o.textContent="Gagal menyalin. Salin manual dari layar."}};
+document.getElementById("rs").onclick=function(){document.querySelectorAll("input[type=radio]").forEach(function(e){e.checked=false});document.getElementById("hasil").hidden=true;prog();window.scrollTo({top:0,behavior:"smooth"})};
+</script>
+</body>
+</html>
